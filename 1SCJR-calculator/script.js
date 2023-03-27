@@ -1,4 +1,3 @@
-// const display = document.getElementById('displayyy');
 const display = document.querySelector("#display");
 const keys = document.querySelectorAll("[id*=tecla]");
 const operators = document.querySelectorAll("[id*=operador]");
