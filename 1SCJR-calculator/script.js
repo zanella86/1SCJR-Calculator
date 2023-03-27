@@ -35,7 +35,7 @@ const calculate = () => {
     const actualNumber = display.textContent.replace(",",".");
     const result = eval(previousNumber + operator + actualNumber);
     newNumber = true;
-    updateDisplay(result);
+    updateDisplay(result.toString().replace(".",","));
 }
 
 const equal = document.querySelector("#igual");
@@ -43,7 +43,9 @@ const equal = document.querySelector("#igual");
 equal.addEventListener('click', calculate);
 
 const decimalValue = () => { 
-    updateDisplay(",");
+    if (!display.textContent.includes(",")) {
+        updateDisplay(",");        
+    }
 }
 
 document.querySelector("#decimal").addEventListener("click", decimalValue);
