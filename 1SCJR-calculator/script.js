@@ -24,7 +24,7 @@ keys.forEach(function (key) {
 });
 
 const selectOperator = (event) => {
-    previousNumber = display.textContent;
+    previousNumber = display.textContent.replace(",",".");
     operator = event.target.textContent;
     newNumber = true;
 }
@@ -32,7 +32,7 @@ const selectOperator = (event) => {
 operators.forEach((key) => key.addEventListener("click", selectOperator));
 
 const calculate = () => {
-    const actualNumber = display.textContent;
+    const actualNumber = display.textContent.replace(",",".");
     const result = eval(previousNumber + operator + actualNumber);
     newNumber = true;
     updateDisplay(result);
@@ -41,6 +41,12 @@ const calculate = () => {
 const equal = document.querySelector("#igual");
 
 equal.addEventListener('click', calculate);
+
+const decimalValue = () => { 
+    updateDisplay(",");
+}
+
+document.querySelector("#decimal").addEventListener("click", decimalValue);
 
 const clearDisplay = () => display.textContent = "";
 
