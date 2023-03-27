@@ -24,7 +24,7 @@ keys.forEach(function (key) {
 });
 
 const selectOperator = (event) => {
-    previousNumber = display.textContent.replace(",",".");
+    previousNumber = getDisplay();
     operator = event.target.textContent;
     newNumber = true;
 }
@@ -32,7 +32,7 @@ const selectOperator = (event) => {
 operators.forEach((key) => key.addEventListener("click", selectOperator));
 
 const calculate = () => {
-    const actualNumber = display.textContent.replace(",",".");
+    const actualNumber = getDisplay();
     const result = eval(previousNumber + operator + actualNumber);
     newNumber = true;
     updateDisplay(result.toString().replace(".",","));
@@ -43,8 +43,12 @@ const equal = document.querySelector("#igual");
 equal.addEventListener('click', calculate);
 
 const decimalValue = () => { 
+    if (display.textContent === ""){
+        updateDisplay("0,");
+    }
+
     if (!display.textContent.includes(",")) {
-        updateDisplay(",");        
+        updateDisplay(",");
     }
 }
 
@@ -70,6 +74,13 @@ const removeLastNumber = () => {
 
 document.querySelector("#apagar").addEventListener("click", removeLastNumber);
 
-const invertSignal = () => display.textContent *= -1;
+const invertSignal = () => {
+    newNumber = true;
+    let invertValue = getDisplay();
+    invertValue *= (-1);
+    updateDisplay(invertValue.toString().replace(".",","));
+}
 
 document.querySelector("#inverter").addEventListener("click", invertSignal);
+
+const getDisplay = () => display.textContent.replace(",",".");
